@@ -1,6 +1,9 @@
 const table = document.getElementById("laporanTable").getElementsByTagName("tbody")[0];
 const totalKeseluruhanEl = document.getElementById("totalKeseluruhan");
 
+// URL Google Apps Script Web App (GANTI dengan milikmu)
+const SCRIPT_URL = "https://script.google.com/macros/s/PASTE_URL_WEBAPP/exec";
+
 // Hitung otomatis pemasukan & total
 function hitungSaldo() {
   let totalKeseluruhan = 0;
@@ -18,10 +21,10 @@ function hitungSaldo() {
     totalKeseluruhan += total;
   }
   totalKeseluruhanEl.value = totalKeseluruhan;
-  simpanData(); // auto save tiap kali hitung
+  simpanData(); // auto save
 }
 
-// Tambah baris baru (salin tanggal dari baris sebelumnya)
+// Tambah baris baru
 function tambahBaris() {
   let rowCount = table.rows.length;
   let tanggalSebelumnya = rowCount > 0 ? table.rows[rowCount-1].cells[1].children[0].value : "";
@@ -124,6 +127,19 @@ function downloadExcel() {
   link.setAttribute("download", "laporan_keuangan.csv");
   document.body.appendChild(link);
   link.click();
+}
+
+// Kirim ke Google Sheets
+function kirimKeSheets() {
+  let data = JSON.parse(localStorage.getItem("laporanData")) || [];
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.text())
+  .then(txt => alert("✅ Data terkirim ke Google Sheets!"))
+  .catch(err => console.error("❌ Error:", err));
 }
 
 window.onload = loadData;
