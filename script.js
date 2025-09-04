@@ -1,10 +1,10 @@
 const table = document.getElementById("laporanTable").getElementsByTagName("tbody")[0];
 const totalKeseluruhanEl = document.getElementById("totalKeseluruhan");
 
-// URL Google Apps Script Web App (GANTI dengan milikmu)
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzsfG6DX45HPDyKtEetOLhL9pN7TWxBrtQfqre5NWKGSfdcEXDovSMgwrTHqP1qvCsNew/exec";
+// URL Google Apps Script Web App (ganti dengan punyamu)
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT5y_kdS7S7J5ZrGWjgdBW7CGkohz2ul-cSCjzNKPhh-J9ybuTbh0RIvTzeTBwci-LZA/exec";
 
-// Hitung otomatis pemasukan & total
+// Hitung otomatis
 function hitungSaldo() {
   let totalKeseluruhan = 0;
   for (let i = 0; i < table.rows.length; i++) {
@@ -21,7 +21,7 @@ function hitungSaldo() {
     totalKeseluruhan += total;
   }
   totalKeseluruhanEl.value = totalKeseluruhan;
-  simpanData(); // auto save
+  simpanData();
 }
 
 // Tambah baris baru
@@ -45,7 +45,7 @@ function tambahBaris() {
   hitungSaldo();
 }
 
-// Listener otomatis
+// Listener
 function tambahListener() {
   for (let i = 0; i < table.rows.length; i++) {
     let row = table.rows[i];
@@ -55,7 +55,7 @@ function tambahListener() {
   }
 }
 
-// Save ke localStorage
+// Simpan ke localStorage
 function simpanData() {
   let data = [];
   for (let i = 0; i < table.rows.length; i++) {
@@ -75,7 +75,7 @@ function simpanData() {
   localStorage.setItem("laporanData", JSON.stringify(data));
 }
 
-// Load data dari localStorage
+// Load dari localStorage
 function loadData() {
   let data = JSON.parse(localStorage.getItem("laporanData")) || [];
   if (data.length > 0) {
@@ -100,9 +100,9 @@ function loadData() {
   hitungSaldo();
 }
 
-// Download ke Excel (CSV)
+// Download Excel (CSV)
 function downloadExcel() {
-  let data = [["No","Tanggal","Nama Menu","Harga","PCS","Pemasukan","Pengeluaran","Total","Keterangan"]];
+  let data = [["No","Tanggal","Menu","Harga","PCS","Pemasukan","Pengeluaran","Total","Keterangan"]];
   for (let i = 0; i < table.rows.length; i++) {
     let row = table.rows[i];
     data.push([
@@ -119,9 +119,7 @@ function downloadExcel() {
   }
   data.push(["","","","","","","TOTAL KESELURUHAN", totalKeseluruhanEl.value, ""]);
 
-  let csvContent = "data:text/csv;charset=utf-8," 
-    + data.map(e => e.join(",")).join("\n");
-
+  let csvContent = "data:text/csv;charset=utf-8," + data.map(e => e.join(",")).join("\n");
   let link = document.createElement("a");
   link.setAttribute("href", encodeURI(csvContent));
   link.setAttribute("download", "laporan_keuangan.csv");
@@ -138,8 +136,8 @@ function kirimKeSheets() {
     headers: { "Content-Type": "application/json" }
   })
   .then(res => res.text())
-  .then(txt => alert("✅ Data terkirim ke Google Sheets!"))
-  .catch(err => console.error("❌ Error:", err));
+  .then(txt => alert("✅ Data berhasil terkirim ke Google Sheets"))
+  .catch(err => alert("❌ Gagal kirim ke Google Sheets"));
 }
 
 window.onload = loadData;
