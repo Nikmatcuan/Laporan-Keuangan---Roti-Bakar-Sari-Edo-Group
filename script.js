@@ -1,8 +1,35 @@
 const table = document.getElementById("laporanTable").getElementsByTagName("tbody")[0];
 const totalKeseluruhanEl = document.getElementById("totalKeseluruhan");
+const data = {
+  tanggal: "2025-09-05",
+  namaMenu: "Roti Bakar",
+  harga: 10000,
+  pcs: 10,
+  pemasukan: 100000,
+  pengeluaran: 23000,
+  total: 77000,
+  keterangan: "Catatan tambahan"
+};
 
-// URL Google Apps Script Web App (ganti dengan punyamu)
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT5y_kdS7S7J5ZrGWjgdBW7CGkohz2ul-cSCjzNKPhh-J9ybuTbh0RIvTzeTBwci-LZA/exec";
+fetch("https://script.google.com/macros/s/AKfycbxT5y_kdS7S7J5ZrGWjgdBW7CGkohz2ul-cSCjzNKPhh-J9ybuTbh0RIvTzeTBwci-LZA/exec", {
+  method: "POST",
+  body: JSON.stringify(data),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then(response => response.json())
+.then(response => {
+  if(response.result === "success"){
+    alert("Data berhasil dikirim!");
+  } else {
+    alert("Gagal kirim: " + response.message);
+  }
+})
+.catch(error => {
+  alert("Terjadi error: " + error.message);
+});
+
 
 // Hitung otomatis
 function hitungSaldo() {
