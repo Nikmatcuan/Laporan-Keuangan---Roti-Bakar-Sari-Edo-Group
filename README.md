@@ -1,4 +1,3 @@
-# Laporan-Keuangan---Roti-Bakar-Sari-Edo-Group
 # 📊 Laporan Keuangan - Roti Bakar Sari Edo Group
 
 Aplikasi web sederhana untuk mencatat laporan keuangan.
