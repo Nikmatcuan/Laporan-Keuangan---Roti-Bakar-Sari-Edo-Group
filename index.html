@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan Keuangan - Roti Bakar Sari Edo Group</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Laporan Keuangan<br>Roti Bakar Sari Edo Group</h1>
+
+    <table id="laporanTable">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Tanggal</th>
+          <th>Nama Menu</th>
+          <th>Harga (Rp)</th>
+          <th>PCS</th>
+          <th>Pemasukan (Rp)</th>
+          <th>Pengeluaran (Rp)</th>
+          <th>Total</th>
+          <th>Keterangan Pengeluaran</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7" style="text-align:right; font-weight:bold;">Total Keseluruhan:</td>
+          <td><input type="number" id="totalKeseluruhan" readonly></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="buttons">
+      <button onclick="tambahBaris()">+ Tambah Baris</button>
+      <button onclick="simpanData()">💾 Save</button>
+      <button onclick="downloadExcel()">⬇️ Download Excel</button>
+      <button onclick="kirimKeSheets()">📤 Kirim ke Google Sheets</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
