@@ -2,7 +2,7 @@ const table = document.getElementById("laporanTable").getElementsByTagName("tbod
 const totalKeseluruhanEl = document.getElementById("totalKeseluruhan");
 
 // URL Google Apps Script Web App (ganti dengan punyamu)
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT5y_kdS7S7J5ZrGWjgdBW7CGkohz2ul-cSCjzNKPhh-J9ybuTbh0RIvTzeTBwci-LZA/exec";
+const SCRIPT_URL = "https://script.google.com/macros/library/d/1CGuLy3W6U91Gu1XQaqmCxRlAdztFs94F_2YSGUVDE1G4MmAedw_VlwHo/2";
 
 // Hitung otomatis
 function hitungSaldo() {
